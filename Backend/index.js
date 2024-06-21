@@ -1,7 +1,7 @@
 import express from "express";
 import mongoose from "mongoose";
 import dotenv from "dotenv";
-import cors from "cors";
+import cors from 'cors';
 // import path from "path";
 
 import bookRoute from "./route/book.route.js";
@@ -9,7 +9,12 @@ import userRoute from "./route/user.route.js";
 
 const app = express();
 
-app.use(cors());
+// Allow requests from https://book-store-zbhe.vercel.app
+const corsOptions = {
+    origin: 'https://book-store-rb3c.onrender.com',
+    optionsSuccessStatus: 200 // some legacy browsers (IE11, various SmartTVs) choke on 204
+  };
+app.use(cors(corsOptions));
 app.use(express.json());
 
 dotenv.config();
