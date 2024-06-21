@@ -19,7 +19,7 @@ const Contactinfo = () => {
         };
 
         try {
-            const res = await axios.post("http://localhost:4001/user/contact", contactdetails);
+            const res = await axios.post("https://book-store-rb3c.onrender.com/user/contact", contactdetails);
             console.log(res.data);
             toast.success("Thank you for contacting us!");
         } catch (err) {
