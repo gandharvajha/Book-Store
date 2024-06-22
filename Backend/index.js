@@ -9,11 +9,11 @@ import userRoute from "./route/user.route.js";
 
 const app = express();
 
-// Allow requests from https://book-store-zbhe.vercel.app
+// Allow requests from https://book-store-2u9g.onrender.com
 const corsOptions = {
-    origin: 'https://book-store-rb3c.onrender.com',
-    optionsSuccessStatus: 200 // some legacy browsers (IE11, various SmartTVs) choke on 204
-  };
+    origin: 'https://book-store-2u9g.onrender.com',
+    optionsSuccessStatus: 200
+};
 app.use(cors(corsOptions));
 app.use(express.json());
 
