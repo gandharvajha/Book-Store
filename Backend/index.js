@@ -1,50 +1,22 @@
 import express from "express";
 import mongoose from "mongoose";
 import dotenv from "dotenv";
-import cors from 'cors';
-// import path from "path";
-
-import bookRoute from "./route/book.route.js";
-import userRoute from "./route/user.route.js";
 
 const app = express();
-
-// Allow requests from https://book-store-2u9g.onrender.com
-const corsOptions = {
-    origin: 'https://book-store-2u9g.onrender.com',
-    optionsSuccessStatus: 200
-};
-app.use(cors(corsOptions));
-app.use(express.json());
-
 dotenv.config();
 
 const PORT = process.env.PORT || 4000;
-const URI = process.env.MongoDBURI;
+const URI = process.env.mongoDBURI;
 
-// connect to mongoDB
-try {
-    mongoose.connect(URI, {
-        useNewUrlParser: true,
-        useUnifiedTopology: true,
-    });
-    console.log("Connected to mongoDB");
-} catch (error) {
-    console.log("Error: ", error);
-}
+// Connect to MongoDB
+mongoose.connect(URI, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+})
+.then(() => console.log("Connected to MongoDB"))
+.catch(error => console.log("Error connecting to MongoDB:", error));
 
-// defining routes
-app.use("/book", bookRoute);
-app.use("/user", userRoute);
-
-//deployment 
-// if(process.env.NODE_ENV==="production"){
-//     const dirPath=path.resolve()
-//     app.use(express.static("Frontend/dist"));
-//     app.get("*",(req,res)=>{
-//         res.sendFile(path.resolve(dirPath,"Frontend","dist","index.html"))
-//     })
-// }
+// Other server setup and routes
 
 app.listen(PORT, () => {
     console.log(`Server is listening on port ${PORT}`);
